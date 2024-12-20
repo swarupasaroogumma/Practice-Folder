@@ -6,6 +6,46 @@
     <title>Document</title>
 </head>
 <body>
-    <hl>hi</hl>
+    <h4>1. Todo list</h4>
+    <div id="todo-container"> <!-- Changed id to reflect a parent container -->
+        <div id="todo-2">
+            <h4>2. List-2</h4>
+            <button onclick="deletetodo(2)">delete</button>
+        </div>
+    </div>
+
+    <input type="text" id="todo-input" />
+    <button onclick="add()">add</button>
+
+    <script>
+        function deletetodo(index) {
+            // Find the element by its id
+            const element = document.getElementById("todo-" + index);
+
+            // Check if the element exists before trying to remove it
+            if (element) {
+                element.parentNode.removeChild(element);
+            } else {
+                console.log("Element not found");
+            }
+        }
+
+        function add() {
+            const input = document.getElementById("todo-input"); // Fetch the input element
+            const inputValue = input.value.trim(); // Get and trim the input value
+
+            if (inputValue) {
+                const newDiv = document.createElement("div"); // Create a new div
+                newDiv.innerHTML = `<h4>${inputValue}</h4>`; // Set the new div's content
+
+                const container = document.getElementById("todo-container"); // Parent container
+                container.appendChild(newDiv); // Append the new div to the container
+
+                input.value = ""; // Clear the input field
+            } else {
+                alert("Please enter a value"); // Alert if input is empty
+            }
+        }
+    </script>
 </body>
 </html>
