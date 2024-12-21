@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html> 
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter todo" />
+    <button onclick="addtodo()">Add Todo</button>
+
+    <script>
+        function addtodo() {
+            const val = document.querySelector("input").value; // Get the input value
+            if (!val) return; // Prevent empty todos
+            
+            const spanele = document.createElement("span"); // Create span element
+            const butele = document.createElement("button"); // Create button element
+            spanele.innerHTML = val; // Set the span's inner HTML
+            butele.innerHTML = "Delete"; // Set the button's inner HTML
+
+            const divel = document.createElement("div"); // Create a div
+            divel.appendChild(spanele); // Append span to div
+            divel.appendChild(butele); // Append button to div
+
+            document.querySelector("body").appendChild(divel); // Append div to body
+
+            // Add functionality to the delete button
+            butele.onclick = function () {
+                divel.remove();
+            };
+        }
+    </script>
+</body>
+</html>
+-->
+
+
+<!--
+ every time we have to update the dom, dom manipulation become difficult, it is not suitable for frontend big application
+ thats why state ,component came to picture
+ state is variable which contain  dynamic elements,
+  components takes this state as input ,
+  render takes state  and  render to dom based on input
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type ="text"/>
+    <button onclick="addtodo()">add todo</button>
+    <div id="todos"></div>
+    <script>
+        let tds=[];
+        function addtodo(){
+            tds.push({
+                title:document.querySelector("input").value
+            })
+            render()
+        }
+        function Deleteto(index){
+            tds.splice(index,1);
+            render();
+
+
+        }
+        function componentdo(todo1,index){
+            const divel=document.createElement("div");
+            const spanele=document.createElement("span");
+            const buttonele=document.createElement("button");
+            spanele.innerHTML=todo1.title;
+            buttonele.innerHTML="Delete";
+            buttonele.onclick = function () {
+                Deleteto(index); // Pass the index to the delete function
+            };
+            divel.appendChild(spanele);
+            divel.appendChild(buttonele);
+            return divel;
+
+
+        }
+        function render(){
+            document.querySelector("#todos").innerHTML = "";
+            for(let i=0;i<tds.length;i++){
+                const crea=componentdo(tds[i],i);
+                document.querySelector("#todos").appendChild(crea);
+
+            }
+        }
+
+    </script>
+    
+
+
+</body>
+</html>
+
