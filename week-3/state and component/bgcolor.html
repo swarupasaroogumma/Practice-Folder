@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* Ensure body takes full height */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+
+        #colrbtn {
+            margin-top: auto; /* Pushes the button container to the bottom */
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Optional: Background to make it more visible */
+        }
+
+        button {
+            padding: 14px;
+            margin: 14px;
+            width: 100px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="colrbtn"></div>
+    <script>
+        let btn = ["red", "blue", "orange", "default"];
+
+        
+        function createcomponrnt(btncolr) {
+            const button = document.createElement("button");
+
+            
+            button.innerText = btncolr;
+            button.style.padding = "14px";
+            button.style.margin = "14px";
+             button.style.bottom = "20px"
+
+            
+            button.onclick = function () {
+                if (btncolr === "default") {
+             document.body.style.background = "white";
+               } else {
+                document.body.style.background = btncolr;
+               }
+
+               // document.body.style.background = btncolr === "default" ? "white" : btncolr;
+            };
+
+            return button; // if it is not return nothing will reach to render component
+        }
+
+        // Function to render buttons
+        function render() {
+            const ele = document.querySelector("#colrbtn");
+            ele.innerHTML = ""; // Clear existing buttons
+
+            for (let i = 0; i < btn.length; i++) {
+                const clrchn = createcomponrnt(btn[i]); // Create button
+                ele.appendChild(clrchn); 
+            }
+        }
+
+        
+        render();
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Buttons</title>
+</head>
+<body>
+    <input type="text" id="colorInput" placeholder="Enter color name" />
+    <button onclick="addtodo()">Add Button</button>
+    <div id="clrbtn"></div>
+
+    <script>
+        let bts = [
+            { value: "color", color: "red" },
+            { value: "color", color: "blue" },
+            { value: "color", color: "green" }
+        ];
+
+        // Function to add a new button
+        function addtodo() {
+            const colorInput = document.querySelector("#colorInput").value.trim();
+            if (colorInput) {
+                bts.push({ value: "color", color: colorInput });
+                render(); // Re-render buttons
+                document.querySelector("#colorInput").value = ""; // Clear input
+            } else {
+                alert("Please enter a color name.");
+            }
+        }
+
+        // Function to create a button
+        function createbtn(buttonData) {
+            const btn = document.createElement("button");
+            const divele = document.createElement("div");
+
+            // Set button text and styles
+            btn.innerText = buttonData.color;
+            btn.style.padding = "10px";
+            btn.style.margin = "5px";
+
+            // Onclick handler to change background color
+            btn.onclick = function () {
+                document.body.style.background = buttonData.color;
+            };
+
+            divele.appendChild(btn); // Append button to div
+            return divele; // Return the div containing the button
+        }
+
+        // Function to render buttons
+        function render() {
+            const container = document.querySelector("#clrbtn");
+            container.innerHTML = ""; // Clear existing buttons
+
+            for (let i = 0; i < bts.length; i++) {
+                const btnDiv = createbtn(bts[i]); // Create button with data
+                container.appendChild(btnDiv); // Append to container
+            }
+        }
+
+        // Initial render
+        render();
+    </script>
+</body>
+</html> -->
