@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="selec"></div>
+    <h4>Select input type</h4>
+    <script>
+        let value=[ textinputs, checkboxes, radiobuttons];
+        function cratetd(data){
+            const  lb=document.createElement("select");
+            const  opt=document.createElement("option");
+            opt.Text=data;
+            lb.appendChild(opt);
+            return 
+        }
+
+        function 
+    </script>
+    
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .form-builder {
+            margin-bottom: 20px;
+        }
+        .form-builder input, .form-builder select, .form-builder button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .form-preview {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .form-preview div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic Form Builder</h1>
+
+    <div class="form-builder">
+        <label for="field-type">Select Input Type: </label>
+        <select id="field-type">
+            <option value="text">Text Input</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="radio">Radio Button</option>
+        </select>
+        <label for="field-label">Label: </label>
+        <input type="text" id="field-label" placeholder="Enter label" />
+        <button onclick="addField()">Add Field</button>
+    </div>
+
+    <div class="form-preview" id="form-preview">
+        <h3>Form Preview:</h3>
+        <!-- Dynamically added fields will appear here -->
+    </div>
+
+    <script>
+        // Function to add a new field to the form preview area
+        function addField() {
+            const fieldType = document.getElementById('field-type').value;
+            const label = document.getElementById('field-label').value;
+            const previewArea = document.getElementById('form-preview');
+            
+            if (!label) {
+                alert("Please provide a label for the field!");
+                return;
+            }
+
+            let fieldElement;
+
+            // Create field based on selected type
+            if (fieldType === "text") {
+                fieldElement = document.createElement("div");
+                fieldElement.innerHTML = `<label>${label}: </label><input type="text" />`;
+            } else if (fieldType === "checkbox") {
+                fieldElement = document.createElement("div");
+                fieldElement.innerHTML = `<label>${label}: </label><input type="checkbox" />`;
+            } else if (fieldType === "radio") {
+                fieldElement = document.createElement("div");
+                fieldElement.innerHTML = `<label>${label}: </label><input type="radio" />`;
+            }
+
+            // Append the field to the preview area
+            previewArea.appendChild(fieldElement);
+
+            // Clear the label input after adding the field
+            document.getElementById('field-label').value = '';
+        }
+    </script>
+
+</body>
+</html>
