@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+
+<body>
+    Youtube
+    <div id="post"></div>
+    <script>
+        async function getdata() {
+            // fetch sends the background request to the server
+            //  const res = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+            //  const data=await res.json();
+            //  console.log(data);
+            //  document.getElementById("post").innerHTML=data.body
+             //JSON.stringify(data)- if i want whole data
+
+             const res=await axios.get("https://jsonplaceholder.typicode.com/posts/1");
+             console.log(res.data);
+             document.getElementById("post").innerHTML=res.data.title;
+
+
+            
+        }
+        getdata();
+        
+
+    </script>
+    
+</body>
+</html>
