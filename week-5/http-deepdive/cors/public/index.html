@@ -1,0 +1,72 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+<body>
+    <input id="p1" placeholder="enter first digit" type="text">
+    <input id="p2" placeholder="enter second digit" type="text">
+    <button onclick="datasend()">click</button>
+    <script>
+       const a= document.getElementById("p1").value
+       const b= document.getElementById("p2").value
+        async function datasend(){
+            const res=await axios.post("http://localhost:3000/sum",{
+                a: parseInt(a),
+                b: parseInt(b)
+            })
+        }
+
+    </script>
+    
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+<body>
+    <h1>Sum Calculator</h1>
+    <input id="p1" placeholder="Enter first digit" type="text">
+    <input id="p2" placeholder="Enter second digit" type="text">
+    <button onclick="datasend()">Calculate</button>
+    <p id="result">Result will appear here...</p>
+
+    <script>
+        async function datasend() {
+            // Get the latest values from inputs
+            const a = document.getElementById("p1").value;
+            const b = document.getElementById("p2").value;
+
+            // Validate inputs
+            if (!a || !b || isNaN(a) || isNaN(b)) {
+                document.getElementById("result").textContent = "Please enter valid numbers.";
+                return;
+            }
+
+            try {
+                // Send data to the server
+                const res = await axios.post("http://localhost:3000/sum", {
+                    a: parseInt(a),
+                    b: parseInt(b)
+                });
+
+                // Display the result
+                document.getElementById("result").textContent = `Result: ${res.data.add}`;
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("result").textContent = "Error calculating sum. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
