@@ -33,6 +33,7 @@ app.post("/signup",function(req, res){
 app.post("/sign",function(req, res){
     const username=req.body.username;
     const password =req.body.password;
+
     //find seraches each array object  {username:122, pass:1234}
     //if it is find it modies the array by add a token to it
 
