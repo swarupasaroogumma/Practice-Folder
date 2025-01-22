@@ -36,7 +36,7 @@ app.post("/sigin", function (req, res) {
 // Authentication middleware
 function auth(req, res, next) {
     const authHeader = req.headers.authorization;
-;
+
     try {
         const verifiedToken = jwt.verify(authHeader, JWT_SECRET);
         req.username = verifiedToken.username;

@@ -1,3 +1,4 @@
+
 const express=require("express")
 const jwt=require("jsonwebtoken")
 const JWT_SECRET="mylovelyjesus"
@@ -6,6 +7,9 @@ app.use(express.json());;
 
 const users=[]
 const todos=[]
+app.get("/", function(req,res){
+    res.sendFile(__dirname + "/public/index.html")
+})
 app.post("/signup", function(req,res){
     const username=req.body.username;
     const password=req.body.password;
@@ -64,6 +68,26 @@ app.put("/todos/:id",auth,function(req,res){
     }
     
 })
+app.get("/todos",auth,function(req,res){
+    const userTodos = todos.filter(todo => todo.username === req.username);
+    res.send({ todos: userTodos });
+
+})
+
+app.delete("/todos/:id", auth, function (req, res) {
+    const todoIndex = todos.findIndex(
+        (u) => u.username === req.username && u.id === parseInt(req.params.id)
+    );
+
+    if (todoIndex !== -1) {
+        // Remove the TODO at the specified index
+        todos.splice(todoIndex, 1);
+        res.send({ message: "TODO deleted successfully!" });
+    } else {
+        res.status(404).send({ message: "TODO not found!" });
+    }
+});
+
 
 
 

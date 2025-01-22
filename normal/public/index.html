@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>TODO Application</h1>
+        <div id="auth-section">
+            <h2>Signup / Signin</h2>
+            <input id="username" type="text" placeholder="Username">
+            <input id="password" type="password" placeholder="Password">
+            <button onclick="signup()">Signup</button>
+            <button onclick="signin()">Signin</button>
+        </div>
+
+        <div id="todo-section" style="display: none;">
+            <h2>Your TODOs</h2>
+            <input id="new-todo" type="text" placeholder="Add a new TODO">
+            <button onclick="addTodo()">Add TODO</button>
+            <ul id="todo-list"></ul>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        async function signup() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await axios.post('/signup', { username, password });
+                alert(response.data.message);
+            } catch (err) {
+                console.error(err);
+                alert('Signup failed!');
+            }
+        }
+
+        async function signin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await axios.post('/signin', { username, password });
+                localStorage.setItem('token', response.data.token);
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('todo-section').style.display = 'block';
+                fetchTodos();
+            } catch (err) {
+                console.error(err);
+                alert('Signin failed!');
+            }
+        }
+
+        async function fetchTodos() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('/todos', {
+                    headers: { authorization: token }
+                });
+                const todoList = document.getElementById('todo-list');
+                todoList.innerHTML = '';
+                response.data.todos.forEach(todo => {
+                    const li = document.createElement('li');
+                    li.textContent = todo.task;
+                    if (todo.completed) li.style.textDecoration = 'line-through';
+                    li.addEventListener('click', () => toggleTodo(todo.id));
+                    todoList.appendChild(li);
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Failed to fetch TODOs!');
+            }
+        }
+
+        async function addTodo() {
+            const newTodo = document.getElementById('new-todo').value;
+            try {
+                const token = localStorage.getItem('token');
+                await axios.post('/todos', { task: newTodo }, {
+                    headers: { authorization: token }
+                });
+                fetchTodos();
+            } catch (err) {
+                console.error(err);
+                alert('Failed to add TODO!');
+            }
+        }
+
+        async function toggleTodo(id) {
+            try {
+                const token = localStorage.getItem('token');
+                await axios.put(`/todos/${id}`, {}, {
+                    headers: { authorization: token }
+                });
+                fetchTodos();
+            } catch (err) {
+                console.error(err);
+                alert('Failed to update TODO!');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            document.getElementById('auth-section').style.display = 'block';
+            document.getElementById('todo-section').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
