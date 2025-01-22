@@ -3,6 +3,7 @@ const bcrypt=require("bcrypt")
 const { Usemodel, Todomodel } =require("./db")
 const jwt=require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
+const {z} =require("zod")
 
 const JWT_SECRET="jesusismysaviour"
 mongoose.connect("mongodb+srv://gummaswarupa:Y7OsM2DjkYcBJoFP@cluster0.lslwi.mongodb.net/db-learn")
@@ -10,6 +11,21 @@ const app=express();
 app.use(express.json())
 
 app.post("/signup", async function (req, res) {
+    const reqbody=z.object({
+        email:z.string().min(3).max(100),
+        password:z.string(),
+        name:z.string()
+
+    })
+    //const parsedta=reqbody.parse(req.body)
+    const parsedatasuccess=reqbody.safeParseparse(req.body)
+    if(!parsedatasuccess.success){
+        res.json({
+            msg:"input incorrect format",
+            error:parsedatasuccess.error
+        })
+        return
+    }
     const { email, password, name } = req.body;
 
     try {
