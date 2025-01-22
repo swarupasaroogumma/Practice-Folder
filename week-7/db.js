@@ -4,8 +4,9 @@ const ObjectId=mongoose.ObjectId;
 
 const User=new Schema({
     name:String,
-    email:String,
-    password:password
+    email: { type: String, unique: true },
+
+    password:String
 })
 
 const Todo=new Schema({
