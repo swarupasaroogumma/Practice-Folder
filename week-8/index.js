@@ -3,7 +3,7 @@ const { userRouter } =require("./routes/user");
 const { courseRouter } =require("./routes/course");
 const { adminRouter } =require("./routes/admin");
 
-// const jwt=require("jsonwebtoken");
+//  const jwt=require("jsonwebtoken");
 // const JWT_SECRET="icandoallythethingsthroughchrist"
 
  const mongoose=require("mongoose")

@@ -2,46 +2,11 @@ const  { Router } = require("express")
 const userRouter=Router();
 const {z} = require("zod")
 const bcrypt = require("bcrypt")
-const { userModel } = require("../db")
+const { userModel } = require("../db");
 
-// userRouter.post("/signup", async function(req,res){
-//     const reqbody=object({
-//         email:z.string().min(5).max(50).email(),
-//         password: z
-//         .string()
-//         .min(5, { message: "Password must be at least 5 characters long" })
-//         .max(100, { message: "Password must be at most 100 characters long" })
-//         .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
-//         .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" }),
-//         firstname:z.string().min(5).max(50),
-//         lastname:z.string().min(5).max(50)
+ const jwt=require("jsonwebtoken");
+const JWT_SECRET="icandoallythethingsthroughchrist"
 
-//     })
-
-//     const dataparse=reqbody.safeParse(req.body);
-//     if(!dataparse.success){
-//         res.json({
-//             msg:"invalid format",
-//             error: dataparse.error
-
-//         })
-//         return
-  
-//     }
-   
-//     const {email, password, firstname, lastname} =dataparse.data;
-//     await userModel.create({
-//         email,
-//         password,
-//         firstname,
-//         lastname
-//     })
-
-//     res.json({
-//         msg:"succesfully signup"
-//     })
-
-// })
 
 
 userRouter.post("/signup", async function (req, res) {
@@ -70,7 +35,7 @@ userRouter.post("/signup", async function (req, res) {
     }
 
     // Use validated data
-    const { email, password, firstname, lastname } = dataparse.data;
+    const { email, password, firstname, lastname } = req.body;
 
     try {
         // Hash the password
@@ -96,8 +61,51 @@ userRouter.post("/signup", async function (req, res) {
 });
 
 
-userRouter.post("/signin",function(req,res){
+userRouter.post("/signin", async function(req,res){
+    const reqbody = z.object({
+        email: z.string().min(5).max(50).email(),
+        password: z
+            .string()
+            .min(5, { message: "Password must be at least 5 characters long" })
+            .max(100, { message: "Password must be at most 100 characters long" })
+            .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+            .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    })
+    const datavalid= reqbody.safeParse(req.body)
+    if (!datavalid.success) {
+        res.json({
+            msg: "Invalid input format",
+            error: dataparse.error.errors, // Provide detailed error messages
+        });
+        return;
+    }
+
+    const { email, password} = req.body;
+    const checkingmail= await userModel.findOne({
+        email
+    })
+    if(!checkingmail){
+        res.send({
+            msg:"not a valid user"
+        })
+        return
+    }
     
+        const hashedPassword= await  bcrypt.compare(password,checkingmail.password)
+        if(hashedPassword){
+            const token= jwt.sign({id:checkingmail._id.toString()},JWT_SECRET);
+            res.send({token})
+
+        }
+       else{
+        res.json({
+            msg: "Error invalid credintals",
+           
+        });
+
+    }
+    
+
 })
 userRouter.get("/purchase",function(req,res){
     
