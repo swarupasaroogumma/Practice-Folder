@@ -6,7 +6,7 @@ const { default: mongoose } = require("mongoose");
 const {z} =require("zod")
 
 const JWT_SECRET="jesusismysaviour"
-mongoose.connect("mongodb+srv://gummaswarupa:Y7OsM2DjkYcBJoFP@cluster0.lslwi.mongodb.net/db-learn")
+mongoose.connect("")
 const app=express();
 app.use(express.json())
 
@@ -18,7 +18,7 @@ app.post("/signup", async function (req, res) {
 
     })
     //const parsedta=reqbody.parse(req.body)
-    const parsedatasuccess=reqbody.safeParseparse(req.body)
+    const parsedatasuccess=reqbody.safeParse(req.body)
     if(!parsedatasuccess.success){
         res.json({
             msg:"input incorrect format",

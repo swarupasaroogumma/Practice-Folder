@@ -17,7 +17,7 @@ app.use('/api/v1/admin',adminRouter)
 
 async function main(){
 
-await mongoose.connect("mongodb+srv://gummaswarupa:Y7OsM2DjkYcBJoFP@cluster0.lslwi.mongodb.net/week-8")
+await mongoose.connect("")
 app.listen(3000);
 }
 main()
