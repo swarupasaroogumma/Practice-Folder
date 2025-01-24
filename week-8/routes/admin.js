@@ -1,11 +1,13 @@
 const { Router } =require("express");
 
 const adminRouter=Router();
-const { adminModel }=require("../db")
+const { adminModel, courseModel }=require("../db")
 const jwt=require("jsonwebtoken");
-const JWT_SECRET="icandoallythethingsthroughchrist"
+const JWT_aSECRET="icandoallythethingsthroughchristwhostrengthsme"
 const {z} = require("zod")
 const bcrypt = require("bcrypt")
+
+const {  adminmidd  } =require("../middleware/adminauth")
 
 adminRouter.post("/signup",async function(req,res){
     const reqbody = z.object({
@@ -91,7 +93,7 @@ adminRouter.post("/signin",async function(req,res){
     
         const hashedPassword= await  bcrypt.compare(password,checkingmail.password)
         if(hashedPassword){
-            const token= jwt.sign({id:checkingmail._id.toString()},JWT_SECRET);
+            const token= jwt.sign({id:checkingmail._id.toString()},JWT_aSECRET);
             res.send({token})
 
         }
@@ -108,9 +110,29 @@ adminRouter.post("/signin",async function(req,res){
     
 
 
-adminRouter.post("/course",function(req,res){
-    
+adminRouter.post("/course",  adminmidd, async function(req,res){
+    const adminid= req.userId
+   const { title, description, imageurl, price, creatorId }=req.body
+
+
+   try {
+    const course = await courseModel.create({
+        title,
+        description,
+        imageurl,
+        price,
+        creatorId: adminid,
+    });
+    res.json({ courseid: course._id });
+     }catch (err) {
+    res.status(500).json({
+        msg: "Error creating course",
+        error: err.message,
+    });
+}
 })
+
+
 
 adminRouter.put("/course",function(req,res){
     
