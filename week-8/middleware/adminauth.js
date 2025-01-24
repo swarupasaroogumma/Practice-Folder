@@ -1,9 +1,9 @@
-const { JWT_aSECRET } = require("../config")
+// const { JWT_aSECRET } = require("../config")
 const jwt =require("jsonwebtoken")
 
 function adminmidd( req,res,next){
     const token=req.headers.authorization;
-        const verifyc=jwt.verify(token,JWT_aSECRET);
+        const verifyc=jwt.verify(token,process.env.JWT_aSECRET);
         if(verifyc){
             req.userId=verifyc.id
             next()

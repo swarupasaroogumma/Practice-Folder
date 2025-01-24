@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 const { userModel } = require("../db");
 
  const jwt=require("jsonwebtoken");
-const JWT_SECRET="icandoallythethingsthroughchrist"
+// const JWT_SECRET="icandoallythethingsthroughchrist"
 
 
 
@@ -93,7 +93,7 @@ userRouter.post("/signin", async function(req,res){
     
         const hashedPassword= await  bcrypt.compare(password,checkingmail.password)
         if(hashedPassword){
-            const token= jwt.sign({id:checkingmail._id.toString()},JWT_SECRET);
+            const token= jwt.sign({id:checkingmail._id.toString()},process.env.JWT_SECRET);
             res.send({token})
 
         }

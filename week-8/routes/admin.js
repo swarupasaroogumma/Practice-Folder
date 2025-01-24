@@ -3,7 +3,8 @@ const { Router } =require("express");
 const adminRouter=Router();
 const { adminModel, courseModel }=require("../db")
 const jwt=require("jsonwebtoken");
-const JWT_aSECRET="icandoallythethingsthroughchristwhostrengthsme"
+
+
 const {z} = require("zod")
 const bcrypt = require("bcrypt")
 
@@ -93,7 +94,7 @@ adminRouter.post("/signin",async function(req,res){
     
         const hashedPassword= await  bcrypt.compare(password,checkingmail.password)
         if(hashedPassword){
-            const token= jwt.sign({id:checkingmail._id.toString()},JWT_aSECRET);
+            const token= jwt.sign({id:checkingmail._id.toString()},process.env.JWT_aSECRET);
             res.send({token})
 
         }
