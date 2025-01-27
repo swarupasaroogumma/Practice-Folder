@@ -27,18 +27,20 @@ import { useEffect, useState } from "react";
 // }
 
 // export default App;
- function Increeasebtn(){
+
+ ///function Increeasebtn(){
 
   const[ct,sct]=useState(0);
 
 
   useEffect(function(){
-
+   //mounting
    let clock= setInterval(function(){
       sct( function(ct){
         return ct + 1;
       })
     },1000)
+    //unmounting
     return function(){clearInterval(clock)}
 
   },[])
