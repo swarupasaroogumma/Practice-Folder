@@ -28,13 +28,18 @@ import { useEffect, useState } from "react";
 
 // export default App;
  function Increeasebtn(){
+
   const[ct,sct]=useState(0);
+
+
   useEffect(function(){
-    setInterval(function(){
-      sct(function(ct){
-        return ct+1;
+
+   let clock= setInterval(function(){
+      sct( function(ct){
+        return ct + 1;
       })
     },1000)
+    return function(){clearInterval(clock)}
 
   },[])
   
@@ -46,9 +51,20 @@ import { useEffect, useState } from "react";
  }
 
 function App(){
+  //conditional rendering
+  let[ctvisible,setctvi] =useState(true)
+  useEffect(function(){
+   setInterval(function(){
+      setctvi( c=> !c)
+    },5000)
+   
+
+
+  },[])
+
   return <div>
     <h1>whatsup guys</h1>
-   <Increeasebtn/>
+    {ctvisible &&  <Increeasebtn/>}
   </div>
 
 }
