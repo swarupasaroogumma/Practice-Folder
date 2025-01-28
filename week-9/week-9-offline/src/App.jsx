@@ -29,7 +29,7 @@ function Postcmp() {
         </b>
         
         <div>10k followers</div>
-        <div>2mon ago</div>
+        <div>2months ago</div>
          
          
       </div>
