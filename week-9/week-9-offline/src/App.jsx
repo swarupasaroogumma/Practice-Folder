@@ -96,22 +96,92 @@ import { useState } from "react";
 // export default App;
 
 
- function  App(){
-  const[count,setcount]=useState(0);
+//  function  App(){
+//   const[count,setcount]=useState(0);
 
   // setcount(count+1);
   //some side effects thats we use useEffect 
-  useEffect(function(){
-    setInterval( function(){setcount(c => c+1)},1000)
-  },[])
+//   useEffect(function(){
+//     setInterval( function(){setcount(c => c+1)},1000)
+//   },[])
 
 
-  return(
-    <div>
-      {count}
-    </div>
+//   return(
+//     <div>
+//       {count}
+//     </div>
+//   )
+
+//  }
+
+//  export default App;
+
+
+//linkedin home page
+
+
+// function App(){
+//   const[currentab,setcurren]=useState("feed")
+
+//   return(
+//     <div>
+//       <button onClick={function(){
+//         setcurren("feed")
+//       }} style={{color: currentab == "feed" ? "red" :"black" }}>feed</button>
+//       <button onClick={function(){
+//         setcurren("notif")
+//       }} style={{color: currentab == "notif" ? "red" :"black" }}>notifications</button>
+
+//       <button onClick={function(){
+//         setcurren("post")
+//       }} style={{color: currentab == "post" ? "red" :"black" }}>posts</button>
+//     </div>
+//   )
+
+// }
+
+// export default App;
+
+
+function App(){
+  const[currentab,setcurren]=useState(1)
+  const[tabdata, settabdata]=useState({})
+  //lazy loading 
+  const[loading,lazyload]=useState(true)
+
+  useEffect( function(){
+    lazyload(true)
+
+    fetch('https://jsonplaceholder.typicode.com/todos/'+ currentab).then( async (res) =>{
+      const json= await res.json();
+      settabdata(json)
+      lazyload(false)
+
+    }
+    )
+
+
+  },[currentab]
+
   )
 
- }
+  return(
+      <div>
+        <button onClick={function(){
+          setcurren(1)
+        }} style={{color: currentab == 1 ? "red" :"black" }}>t1</button>
+        <button onClick={function(){
+          setcurren(2)
+        }} style={{color: currentab == 2 ? "red" :"black" }}>t2</button>
+  
+        <button onClick={function(){
+          setcurren(3)
+        }} style={{color: currentab == 3 ? "red" :"black" }}>t3</button>
+        <br/>
+        { loading ? "...loading " :tabdata.title}
+      </div>
+      
+  )
 
- export default App;
+}
+export default App;
