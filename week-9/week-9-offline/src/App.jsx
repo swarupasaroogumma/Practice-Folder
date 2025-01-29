@@ -11,6 +11,7 @@
 //           <div>
 //           <Postcmp/>
 
+import { useEffect } from "react";
 import { useState } from "react";
 
 //           </div>
@@ -66,28 +67,51 @@ import { useState } from "react";
 // export default App;
 
 
-function App(){
- return(
-  <div>
-    <Toggle/>
-  </div>
- );
+// function App(){
+//  return(
+//   <div>
+//     <Toggle/>
+//   </div>
+//  );
 
-}
+// }
 
 
-function Toggle(){
+// function Toggle(){
 
-  const[isvisible,setvisible]=useState(false)
-  function toglin(){
-    setvisible(!isvisible)
-  }
+//   const[isvisible,setvisible]=useState(false)//define state variable
+
+//   //when a state variable changes,the components that contains state variable  rerenders
+//   function toglin(){
+//     setvisible(!isvisible)
+//   }
+
+//   return(
+//   <div>
+//     <button onClick={toglin}>button component</button>
+//     {isvisible && <p>hi hlo</p>}
+//   </div>)
+
+// }
+// export default App;
+
+
+ function  App(){
+  const[count,setcount]=useState(0);
+
+  // setcount(count+1);
+  //some side effects thats we use useEffect 
+  useEffect(function(){
+    setInterval( function(){setcount(c => c+1)},1000)
+  },[])
+
 
   return(
-  <div>
-    <button onClick={toglin}>button component</button>
-    {isvisible && <p>hi hlo</p>}
-  </div>)
+    <div>
+      {count}
+    </div>
+  )
 
-}
-export default App;
+ }
+
+ export default App;
