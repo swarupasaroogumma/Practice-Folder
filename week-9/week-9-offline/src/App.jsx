@@ -11,8 +11,8 @@
 //           <div>
 //           <Postcmp/>
 
-import { useEffect } from "react";
-import { useState } from "react";
+
+
 
 //           </div>
 
@@ -143,45 +143,140 @@ import { useState } from "react";
 // export default App;
 
 
-function App(){
-  const[currentab,setcurren]=useState(1)
-  const[tabdata, settabdata]=useState({})
-  //lazy loading 
-  const[loading,lazyload]=useState(true)
+// function App(){
+//   const[currentab,setcurren]=useState(1)
+//   const[tabdata, settabdata]=useState({})
+//   //lazy loading 
+//   const[loading,lazyload]=useState(true)
 
-  useEffect( function(){
-    lazyload(true)
+//   useEffect( function(){
+//     lazyload(true)
 
-    fetch('https://jsonplaceholder.typicode.com/todos/'+ currentab).then( async (res) =>{
-      const json= await res.json();
-      settabdata(json)
-      lazyload(false)
+//     fetch('https://jsonplaceholder.typicode.com/todos/'+ currentab).then( async (res) =>{
+//       const json= await res.json();
+//       settabdata(json)
+//       lazyload(false)
 
-    }
-    )
+//     }
+//     )
 
 
-  },[currentab]
+//   },[currentab]
 
-  )
+//   )
 
-  return(
-      <div>
-        <button onClick={function(){
-          setcurren(1)
-        }} style={{color: currentab == 1 ? "red" :"black" }}>t1</button>
-        <button onClick={function(){
-          setcurren(2)
-        }} style={{color: currentab == 2 ? "red" :"black" }}>t2</button>
+//   return(
+//       <div>
+//         <button onClick={function(){
+//           setcurren(1)
+//         }} style={{color: currentab == 1 ? "red" :"black" }}>t1</button>
+//         <button onClick={function(){
+//           setcurren(2)
+//         }} style={{color: currentab == 2 ? "red" :"black" }}>t2</button>
   
-        <button onClick={function(){
-          setcurren(3)
-        }} style={{color: currentab == 3 ? "red" :"black" }}>t3</button>
-        <br/>
-        { loading ? "...loading " :tabdata.title}
-      </div>
+//         <button onClick={function(){
+//           setcurren(3)
+//         }} style={{color: currentab == 3 ? "red" :"black" }}>t3</button>
+//         <br/>
+//         { loading ? "...loading " :tabdata.title}
+//       </div>
       
-  )
+//   )
 
+// }
+// export default App;
+
+
+// function App(){
+//   const[toggle,settoggle]=useState(true);
+//   useEffect(function(){
+//     setInterval(()=>{settoggle(c => !c)},5000)
+
+//   },[])
+
+//  return(<div>
+//  {  toggle && <Timer/>}
+//  </div>)
+// }
+
+// function Timer(){
+
+//   const[ct,setct]=useState(0);
+
+//   useEffect(function(){
+//    let clk= setInterval(()=>{setct(c=> c+1)},10000)
+//     return function(){
+//       clearInterval(clk)
+
+//     }
+
+//   },[])
+//   return(<div>
+//     the secs is{ct} lapse
+
+//   </div>)
+// }
+
+// export default App;
+
+
+//children props
+
+
+
+// const Card = ({ children }) => {
+//     return (
+//         <div style={{
+//             border: '1px solid #ccc',
+//             borderRadius: '5px',
+//             padding: '20px',
+//             margin: '10px',
+//             boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+//         }}>
+//             {children}
+//         </div>
+//     );
+// };
+
+// const App = () => {
+//     return (
+//         <div>
+//             <Card>
+//                 <h2>Card Title</h2>
+//                 <p>This is some content inside the card.</p>
+//             </Card>
+//             <Card>
+//                 <h2>Another Card</h2>
+//                 <p>This card has different content!</p>
+//             </Card>
+//         </div>
+//     );
+// };
+
+// export default App;
+function App() {
+  const todos = [
+    { task: "eating breakfast", done: true },
+    { task: "going to gym", done: false }
+  ];
+
+  return (
+    <div>
+      {todos.map(todo => (
+        <Todo key={todo.task} task={todo.task} done={todo.done} />
+      ))}
+    </div>
+  );
 }
+
+function Todo({ task, done }) {
+  return (
+    <div>
+      {task} - {done ? "done" : "not done"}
+    </div>
+  );
+}
+
 export default App;
+
+//fragement by <>  because react contains only one parent
