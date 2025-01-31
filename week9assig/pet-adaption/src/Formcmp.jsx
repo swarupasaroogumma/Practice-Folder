@@ -188,7 +188,7 @@ function Formcmp() {
             placeholder="Select or type a pet type"
           />
 
-          {/* Datalist for dropdown options */}
+          {/* Datalist for dropdown optionss */}
           <datalist id="pet-options">
           <select name="Pettype" value={formvalues.Pettype} onChange={handleoption}>
             <option value="Dog">Dog</option>
