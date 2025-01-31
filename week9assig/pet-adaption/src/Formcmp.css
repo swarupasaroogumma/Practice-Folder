@@ -51,4 +51,24 @@
   .submit-btn:hover {
     background: #0056b3;
   }
+  .table-container {
+    margin-top: 30px;
+    text-align: center;
+  }
   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #007bff;
+    color: white;
+  }
