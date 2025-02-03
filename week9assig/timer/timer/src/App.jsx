@@ -1,7 +1,8 @@
 // import { BrowserRouter, Routes, Route,Link,useNavigate, Outlet } from "react-router-dom";
 
+import { useState } from "react";
 import { useRef } from "react";
-import { use } from "react";
+
 
 // function App(){
   
@@ -82,26 +83,58 @@ import { use } from "react";
 
 
 
+// function App(){
+//   const inputfvs=useRef()
+//   function focuscmp(){
+//     inputfvs.current.focus()
+
+//   }
+
+
+// return(
+
+//   <> 
+//   <input ref={inputfvs} type="text"/>
+//   <input type="text"/>
+//   <button onClick={focuscmp}>submit</button>
+
+
+
+//   </>
+// )
+
+// }
+
+// export default App;
 function App(){
-  const inputfvs=useRef()
-  function focuscmp(){
-    inputfvs.current.focus()
+   const[time,settime]=useState(0);
+   const reftime=useRef();
 
-  }
+ function startbtn(){
+ let clk= setInterval(function(){
+    settime( c => c+1);
+
+  },1000)
+  reftime.current=clk
+
+ }
+
+ function stopbtn(){
+  clearInterval(reftime.current)
+ }
 
 
-return(
-
-  <> 
-  <input ref={inputfvs} type="text"/>
-  <input type="text"/>
-  <button onClick={focuscmp}>submit</button>
-
+   return(
+    <>
+    {time}
+    <button onClick={startbtn}>start</button>
+    <button onClick={stopbtn}>stop</button>
 
 
-  </>
-)
 
+    </>
+   )
 }
+
 
 export default App;
