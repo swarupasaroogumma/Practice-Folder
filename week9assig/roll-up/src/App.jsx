@@ -57,6 +57,7 @@ import { useState } from "react";
 // export default App;
 
 //above we are passing props it increases complexity   propdrilling  thats y use useContext -it contains  createcontext,provider and consumer
+//we have to define the context above all
 const Bulbcontext=createContext();
 
 function App(){
@@ -64,6 +65,7 @@ function App(){
 
   return(
     <>
+    {/* we provide the provider and values (props) */}
     <Bulbcontext.Provider value={{light:light,off:off}}>
 
     <Lightcomp/>
@@ -93,12 +95,14 @@ function Lightcomp(){
 
 
 function Bulbstate(){
+  //consume the values
   const{light}=useContext(Bulbcontext);
   return(
     <>
     {light ? "bulbon":"bulboff"}
 
-    </>
+  
+  </>
   )
 }
 
