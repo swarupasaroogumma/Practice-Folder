@@ -74,7 +74,7 @@ function App(){
     <>
     <p>{state}</p>
     <button onClick={changest}>button</button>
-    <p>previous state{prev}</p>
+    <p>previous state{prevv}</p>
 
 
     </>
