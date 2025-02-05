@@ -11,9 +11,13 @@
 //   }
 // }
 
-import { use } from "react";
-import  { useFetch } from "../hooks/useFetch";
 import { useState } from "react";
+ import{ usePrev } from "../hooks/useFetch";
+
+
+// import { use } from "react";
+// import  { useFetch } from "../hooks/useFetch";
+// import { useState } from "react";
 
 // function App() {
 //   //destructing the array
@@ -32,24 +36,53 @@ import { useState } from "react";
 
 //lets try to fetch the dta from backeng using our custom hook useFetch
 
+// function App(){
+//   const[currrentpost,setcurrentpost]=useState(1)
+//   const{  postdeta,loading }=useFetch("https://jsonplaceholder.typicode.com/todos/" + currrentpost)
+//   if(loading){
+//     return <>
+//     loading bacha.. jara wait some time
+//     </>
+//   }
+
+//   return(
+//     <>
+//     <button onClick={() => {setcurrentpost(1)}}>1</button>
+//     <button onClick={() => {setcurrentpost(2)}}>2</button>
+//     <button onClick={() => {setcurrentpost(3)}}>3</button>
+//     {JSON.stringify(postdeta.title)}
+//     </>
+//   )
+
+// }
+
+// export default App;
+
+
+
+//usePrev hook stores th old value
+
+
 function App(){
-  const[currrentpost,setcurrentpost]=useState(1)
-  const{  postdeta,loading }=useFetch("https://jsonplaceholder.typicode.com/todos/" + currrentpost)
-  if(loading){
-    return <>
-    loading bacha.. jara wait some time
-    </>
-  }
+  const[state,setstate]=useState(0);
+  const prev=usePrev(state)
+   function changest(){
+    setstate( c => c+1)
+   }
 
   return(
     <>
-    <button onClick={() => {setcurrentpost(1)}}>1</button>
-    <button onClick={() => {setcurrentpost(2)}}>2</button>
-    <button onClick={() => {setcurrentpost(3)}}>3</button>
-    {JSON.stringify(postdeta.title)}
+    <p>{state}</p>
+    <button onClick={changest}>button</button>
+    <p>previous state{prev}</p>
+
+
     </>
   )
 
-}
 
+  
+
+
+}
 export default App;

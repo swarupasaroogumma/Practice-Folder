@@ -1,7 +1,10 @@
-import { useEffect } from "react";
-import { useState } from "react";
+// import { useEffect } from "react";
+// import { useState } from "react";
 
-// export  function usePost(){
+import { useEffect } from "react";
+import { useRef } from "react"
+
+// // export  function usePost(){
 //     const[post,setpost]=useState({})
 
 //   async function getposts() {
@@ -27,27 +30,43 @@ import { useState } from "react";
 
 //here it is more generic than above
 
-export function useFetch(url){
-    const[postdeta,setpostdet]=useState({})
-    const[loading,setloading]=useState(true)
-  async function getdetails() {
-    setloading(true)
-    const res= await fetch(url);
-    const json=await res.json();
-    setpostdet(json)
-    setloading(false)
+// export function useFetch(url){
+//     const[postdeta,setpostdet]=useState({})
+//     const[loading,setloading]=useState(true)
+
+//   async function getdetails() {
+//     setloading(true)
+//     const res= await fetch(url);
+//     const json=await res.json();
+//     setpostdet(json)
+//     setloading(false)
     
-  }  
+//   }  
 
-    useEffect(() => {
-        getdetails()
+//     useEffect(() => {
+//         getdetails()
 
-    }, [url])
+//     }, [url])
 
-    return{
-        postdeta,loading
+//     return{
+//         postdeta,loading
+//     }
+
+
+
+// }
+
+
+
+export default  function usePrev(value){
+   const ref=useRef()
+
+   useEffect(() => {
+
+    ref.current=value
+     },[value])
+
+
+   return  ref.current;
+
     }
-
-
-
-}
