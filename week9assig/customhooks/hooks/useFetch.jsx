@@ -69,7 +69,7 @@ import { useRef } from "react"
     //it render componnet when it chande
 //      },[value])
 
-//first it returnds th value
+first it returnds th value
 //    return  ref.current;
 
 //     }
