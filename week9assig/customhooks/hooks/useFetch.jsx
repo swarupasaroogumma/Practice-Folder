@@ -58,15 +58,20 @@ import { useRef } from "react"
 
 
 
-export default  function usePrev(value){
-   const ref=useRef()
+// export default  function usePrev(value){
+//    const ref=useRef()
 
-   useEffect(() => {
+//    useEffect(() => {
 
-    ref.current=value
-     },[value])
+    //it re render the componenet
+
+//     ref.current=value
+    //it render componnet when it chande
+//      },[value])
+
+//first it returnds th value
+//    return  ref.current;
+
+//     }
 
 
-   return  ref.current;
-
-    }

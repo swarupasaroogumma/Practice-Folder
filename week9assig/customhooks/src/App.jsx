@@ -10,9 +10,10 @@
 //     incct:incct
 //   }
 // }
-
-import { useState } from "react";
- import{ usePrev } from "../hooks/useFetch";
+// 
+// import { useState } from "react";
+//  import{ usePrev } from "../hooks/useFetch";
+import { useRef } from "react";
 
 
 // import { use } from "react";
@@ -63,26 +64,63 @@ import { useState } from "react";
 //usePrev hook stores th old value
 
 
-function App(){
-  const[state,setstate]=useState(0);
-  const prev=usePrev(state)
-   function changest(){
-    setstate( c => c+1)
-   }
+// function App(){
+//   const[state,setstate]=useState(0);
+//   const prev=usePrev(state)
+//    function changest(){
+//     setstate( c => c+1)
+//    }
 
-  return(
-    <>
-    <p>{state}</p>
-    <button onClick={changest}>button</button>
-    <p>previous state{prevv}</p>
+//   return(
+//     <>
+//      <p>{state}</p>
+//     <button onClick={changest}>button</button>
+//     <p>previous state{prev}</p>
 
 
-    </>
-  )
+//     </>
+//   )
 
 
   
 
 
+// }
+// export default App;
+
+
+//debouncing 
+
+//usedebouncing -operates the backend function calls -like searching something
+  function useDebounce(originaldata){
+
+    const currndata=useRef();
+
+    return function fn(){
+      clearInterval(currndata.current)
+
+      currndata.current=  setInterval(originaldata,3000)
+
+    }
+
+  }
+
+function App(){
+  
+
+
+function sendata(){
+  fetch("Api.amazon.com/search")
 }
+
+const debounfn=useDebounce(sendata)
+
+return(
+  <>
+  <input type="text" onChange={debounfn}/>
+  </>
+)
+
+}
+
 export default App;
