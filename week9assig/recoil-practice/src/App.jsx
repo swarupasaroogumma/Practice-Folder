@@ -1,20 +1,22 @@
 import { RecoilRoot, useRecoilValue } from "recoil";
-import { home, jobs, network, notifications, totalcost } from "./atoms/linkedin";
+import {  notificationss, totalnotif } from "./atoms/linkedin";
 
 function HomeButtons() {
-  const homevalue = useRecoilValue(home);
-  const networkvalue = useRecoilValue(network);
-  const jobsvalue = useRecoilValue(jobs);
-  const notificationsvalue = useRecoilValue(notifications);
-  const totalcount=useRecoilValue(totalcost)
+  // const homevalue = useRecoilValue(home);
+  // const networkvalue = useRecoilValue(network);
+  // const jobsvalue = useRecoilValue(jobs);
+  // const notificationsvalue = useRecoilValue(notifications);
+  const totalcount=useRecoilValue(totalnotif)
+
+  const val=useRecoilValue(notificationss)
   
   return (
     <>
-      <button>Home {homevalue}</button>
-      <button>My network{networkvalue >=100 ? "99+" : networkvalue}</button>
-      <button>Jobs{jobsvalue}</button>
+      <button>Home {val.home}</button>
+      <button>My network{val.networkvalue >=100 ? "99+" : val.networkvalue}</button>
+      <button>Jobs{val.jobs}</button>
       <button>Messaging</button>
-      <button>Notifications{notificationsvalue}</button>
+      <button>Notifications{val.notifications}</button>
       <button>ME{totalcount}</button>
     </>
   );
