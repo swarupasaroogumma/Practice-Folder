@@ -45,4 +45,27 @@ export  const totalcost=selector({
 })
 
 
+export const notificationss=atom({
+    key:"notify",
+    default:{
+        home:3,
+        jobs:6,
+        message:49,
+        network:77,
+        notifications:122
+
+    }
+
+
+})
+
+export const totalnotif=selector({
+    key:"notifact",
+    get:({get}) => {
+        const allnotif=get(notificationss)
+
+        return allnotif.home+ allnotif.jobs + allnotif.message +allnotif.network +allnotif.notifications
+    }
+})
+
 
