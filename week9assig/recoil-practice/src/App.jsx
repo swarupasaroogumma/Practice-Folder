@@ -6,7 +6,7 @@ function HomeButtons() {
   // const networkvalue = useRecoilValue(network);
   // const jobsvalue = useRecoilValue(jobs);
   // const notificationsvalue = useRecoilValue(notifications);
-  const totalcount=useRecoilValue(totalnotif)
+  const totalcount=useRecoilValue(totalnotifs)
 
   const val=useRecoilValue(notificationss)
   
