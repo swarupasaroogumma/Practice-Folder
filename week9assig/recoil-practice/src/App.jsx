@@ -13,7 +13,7 @@ function HomeButtons() {
   return (
     <>
       <button>Home {val.home}</button>
-      <button>My network{val.networkvalue >=100 ? "99+" : val.networkvalue}</button>
+      <button>My network{val.networkvalue >=100 ? "99++" : val.networkvalue}</button>
       <button>Jobs{val.jobs}</button>
       <button>Messaging</button>
       <button>Notifications{val.notifications}</button>
