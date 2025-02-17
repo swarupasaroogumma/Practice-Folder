@@ -72,7 +72,7 @@ export const notificationss=atom({
 export const totalnotif=selector({
     key:"notifact",
     get:({get}) => {
-        const allnotif=get(notifications)
+        const allnotif=get(notificationss)
 
         return allnotif.home+ allnotif.jobs + allnotif.message +allnotif.network +allnotif.notifications
     }
