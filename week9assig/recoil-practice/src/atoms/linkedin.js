@@ -2,7 +2,7 @@ import axios from "axios"
 import {atom, selector} from "recoil"
 
 
-// export const home=atom({
+// /export const home=atom({
 //     default:0,
 //     key:"home"
 
