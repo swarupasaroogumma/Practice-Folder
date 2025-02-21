@@ -1,4 +1,4 @@
-
+import { Button } from './Button'
 import './App.css'
 
 function App() {
@@ -6,13 +6,8 @@ function App() {
 
   return (
     <>
-      <div>
-      <h1 className="text-3xl bg-blue-700 font-bold underline">
-      Hello world!
-    </h1>
-       
-      </div>
       
+      <Button disabled={true} >signup</Button>
     </>
   )
 }
