@@ -8,7 +8,7 @@ function App() {
     <>
     <div className="h-screen bg-blue-700">
     {/* <Button disabled={true}>Signup</Button>
-    <Input type="text" placeholder="username">username</Input> */}
+    <Input type="text" placeholder="username">usedrname</Input> */}
   <br></br> <br></br>
   <br></br> <br></br>
   <br></br> <br></br>
